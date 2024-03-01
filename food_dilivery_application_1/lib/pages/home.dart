@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_dilivery_application_1/pages/details.dart';
 import 'package:food_dilivery_application_1/widget/widget_suppor.dart';
 
 class Home extends StatefulWidget {
@@ -49,7 +50,7 @@ class _HomeState extends State<Home> {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(2.0)),
                   ),
-                  child: Icon(Icons.account_balance, color: Colors.red),
+                  child: Icon(Icons.account_balance, color: Colors.red), // Another Icon
                 ),
                 Container(
                 margin: const EdgeInsets.only( top:25.0,left: 0.0, right: 10.0),
@@ -58,13 +59,16 @@ class _HomeState extends State<Home> {
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(2.0)),
                   ),
-                  child: Icon(Icons.search_off, color: Colors.red),
+                  child: Icon(Icons.search_off, color: Colors.red), // Another Icon
                 ),
               ],
 
             ),
 
           ),
+
+          // end of cart items
+
           SizedBox(height:1.0),
           Text("Delicious Food",
             style: AppWidget.HeadLineTextFieldStyle()
@@ -76,33 +80,41 @@ class _HomeState extends State<Home> {
             ,
           ),
 
+          //in this line we call the function of "showItem"(category ... images)
+          showItem(),
 
-          showItem(),//in this line we call the function of "showItem"
           SizedBox(height:30.0),
+
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
              crossAxisAlignment: CrossAxisAlignment.start,
               children:[
                
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Material(
-                  elevation: 5.0,
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Container(
-                    padding: EdgeInsets.all(14),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,  //justify content
-                      children: [
+              GestureDetector(
+                onTap:(){
+                  Navigator.push(context,MaterialPageRoute(builder: (context)=>Details()));
+                } ,
+                
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Container(
+                      padding: EdgeInsets.all(14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,  //justify content
+                        children: [
 
-                      Image.asset("images/salad2.png",height: 150,width:150,fit: BoxFit.cover  ,),
-                      Text("Veggie Taco Hash",style: AppWidget.semiBoldTextFieldStyle(),),//ADD tEXT AND ADD TEXT STYLE USING APPWIDGET CLASS WITH OUR METHOD... boldTe...
-                      SizedBox(height: 5.0,),
-                      Text("Fresh and Healthy",style: AppWidget.LightTextFieldStyle(),),
-                      Text("Rs.25",style: AppWidget.semiBoldTextFieldStyle(),)
-                    ],
+                        Image.asset("images/salad2.png",height: 150,width:150,fit: BoxFit.cover  ,),
+                        Text("Veggie Taco Hash",style: AppWidget.semiBoldTextFieldStyle(),),//ADD tEXT AND ADD TEXT STYLE USING APPWIDGET CLASS WITH OUR METHOD... boldTe...
+                        SizedBox(height: 5.0,),
+                        Text("Fresh and Healthy",style: AppWidget.LightTextFieldStyle(),),
+                        Text("Rs.25",style: AppWidget.semiBoldTextFieldStyle(),)
+                      ],
 
+                      ),
                     ),
                   ),
                 ),

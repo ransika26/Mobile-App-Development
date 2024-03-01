@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:food_dilivery_application_1/pages/bottomnav.dart';
 import 'package:food_dilivery_application_1/pages/home.dart';
-
-void main() {
+import 'package:food_dilivery_application_1/pages/login.dart';
+import 'package:food_dilivery_application_1/pages/onboard_pages.dart';
+import 'package:food_dilivery_application_1/pages/signup.dart';
+import 'package:firebase_core/firebase_core.dart';
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -12,6 +17,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    bool isLoggedIn = false;
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -33,7 +39,9 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const BottomNav()
+     //   home: const BottomNav()
+    //  home: isLoggedIn ? const BottomNav() : SignupPage(), // Conditional loading
+       home:const Onboard()
     );
   }
 }

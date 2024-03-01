@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "985031298248",
+    "project_id": "greeneats-9adc7",
+    "storage_bucket": "greeneats-9adc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985031298248:android:1fc2be2a2716fbcaff69fd",
+        "android_client_info": {
+          "package_name": "com.example.food_dilivery_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs65_IdpobIsSHlrhLHzP8CrSGXBxScus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
