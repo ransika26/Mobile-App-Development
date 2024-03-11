@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:food_dilivery_application_1/widget/widget_suppor.dart';
+
 class Details extends StatefulWidget {
   const Details({super.key});
 
