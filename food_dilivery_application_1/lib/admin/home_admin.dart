@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dilivery_application_1/admin/add_food.dart';
 import 'package:food_dilivery_application_1/widget/widget_suppor.dart';
@@ -15,31 +14,31 @@ class _HomeAdminState extends State<HomeAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
+        margin: const EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
         child: Column(
           children: [
             Center(child: Text("Home Admin", style: AppWidget.HeadLineTextFieldStyle(),),),
-            SizedBox(height: 40.0,),
+            const SizedBox(height: 40.0,),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AddFood() ));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const AddFood() ));
               },
               child: Material(
                 elevation: 10.0,
                 borderRadius: BorderRadius.circular(10),
                 child: Center(
                   child: Container(
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(children: [
-                      Padding(padding: EdgeInsets.all(6.0),
+                      Padding(padding: const EdgeInsets.all(6.0),
                       child: Image.asset("images/food.jpg", height: 100, width: 100, fit: BoxFit.cover,),
                       ),
-                      SizedBox(width: 30.0,),
-                      Text("Add Food Items", style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),)
+                      const SizedBox(width: 30.0,),
+                      const Text("Add Food Items", style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),)
                     ],),
                   ),
                 ),

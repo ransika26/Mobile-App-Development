@@ -11,9 +11,9 @@ class AddFood extends StatefulWidget {
 class _AddFoodState extends State<AddFood> {
   final List<String> items = ['Ice-cream', 'Burger', 'Salad', 'Pizza'];
   String? value;
-  TextEditingController namecontroller = new TextEditingController();
-  TextEditingController pricecontroller = new TextEditingController();
-  TextEditingController detailcontroller = new TextEditingController();
+  TextEditingController namecontroller = TextEditingController();
+  TextEditingController pricecontroller = TextEditingController();
+  TextEditingController detailcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _AddFoodState extends State<AddFood> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios_new_outlined,
               color: Color(0xFF373866),
             )),
@@ -36,7 +36,7 @@ class _AddFoodState extends State<AddFood> {
       body: SingleChildScrollView(
         child: Container(
           margin:
-              EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 50.0),
+              const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 50.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -44,7 +44,7 @@ class _AddFoodState extends State<AddFood> {
                 "Upload the Item Picture",
                 style: AppWidget.semiBoldTextFieldStyle(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Center(
@@ -58,28 +58,28 @@ class _AddFoodState extends State<AddFood> {
                       border: Border.all(color: Colors.black, width: 1.5),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.camera_alt_outlined,
                       color: Colors.black,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               Text(
                 "Item Name",
                 style: AppWidget.semiBoldTextFieldStyle(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   controller: namecontroller,
@@ -89,21 +89,21 @@ class _AddFoodState extends State<AddFood> {
                       hintStyle: AppWidget.LightTextFieldStyle()),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               Text(
                 "Item Price",
                 style: AppWidget.semiBoldTextFieldStyle(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   controller: pricecontroller,
@@ -113,21 +113,21 @@ class _AddFoodState extends State<AddFood> {
                       hintStyle: AppWidget.LightTextFieldStyle()),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30.0,
               ),
               Text(
                 "Item Detail",
                 style: AppWidget.semiBoldTextFieldStyle(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: TextField(
                   maxLines: 6,
@@ -138,21 +138,21 @@ class _AddFoodState extends State<AddFood> {
                       hintStyle: AppWidget.LightTextFieldStyle()),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Text(
                 "Select Category",
                 style: AppWidget.semiBoldTextFieldStyle(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Color(0xFFececf8),
+                    color: const Color(0xFFececf8),
                     borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
@@ -161,7 +161,7 @@ class _AddFoodState extends State<AddFood> {
                             value: item,
                             child: Text(
                               item,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18.0, color: Colors.black),
                             )))
                         .toList(),
@@ -169,9 +169,9 @@ class _AddFoodState extends State<AddFood> {
                           this.value = value;
                         })),
                     dropdownColor: Colors.white,
-                    hint: Text("Select Category"),
+                    hint: const Text("Select Category"),
                     iconSize: 36,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_drop_down,
                       color: Colors.black,
                     ),
@@ -179,18 +179,18 @@ class _AddFoodState extends State<AddFood> {
                   ),
                 ),
               ),
-              SizedBox(height: 30.0,),
+              const SizedBox(height: 30.0,),
               Center(
                 child: Material(
                   elevation: 5.0,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
                     width: 150,
                     decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Add",
                         style: TextStyle(

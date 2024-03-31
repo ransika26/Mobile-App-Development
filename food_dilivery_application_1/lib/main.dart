@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_dilivery_application_1/admin/admin_login.dart';
 import 'package:food_dilivery_application_1/admin/home_admin.dart';
-import 'package:food_dilivery_application_1/pages/bottomnav.dart';
-import 'package:food_dilivery_application_1/pages/home.dart';
-import 'package:food_dilivery_application_1/pages/login.dart';
-import 'package:food_dilivery_application_1/pages/onboard_pages.dart';
-import 'package:food_dilivery_application_1/pages/signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +37,7 @@ class MyApp extends StatelessWidget {
         ),
      //   home: const BottomNav()
     //  home: isLoggedIn ? const BottomNav() : SignupPage(), // Conditional loading
-       home: HomeAdmin()
+       home: const HomeAdmin()
     );
   }
 }

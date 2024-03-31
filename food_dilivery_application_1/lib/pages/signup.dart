@@ -21,37 +21,35 @@ class _SignupPageState extends State<SignupPage> {
 
 
   String email="",password="",name="";
-  TextEditingController namecontroller = new TextEditingController();
+  TextEditingController namecontroller = TextEditingController();
 
-  TextEditingController passwordcontroller = new TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
 
-  TextEditingController mailcontroller = new TextEditingController();
+  TextEditingController mailcontroller = TextEditingController();
 
   final _formKey=GlobalKey<FormState>();  //to find user inputting the correct inputs to the text fields
 
   registration() async {
-    if (password != null) {
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword( email: email, password: password);
-        ScaffoldMessenger.of(context).showSnackBar((SnackBar(backgroundColor: Colors.redAccent,content: Text("Registered Successfully", style: TextStyle(fontSize: 20.0),)
-            )
-            )
-        );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BottomNav()));
-      }on FirebaseException catch(e){
-        if(e.code=='weak-password'){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.orangeAccent,
-              content: Text("Password Provided is too Weak", style: TextStyle(fontSize: 18.0),
-              )));
-        }
-        else if(e.code=="email-already-in-use"){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.orangeAccent,
-              content: Text("Account Already exsists", style: TextStyle(fontSize: 18.0),
-              )));
-        }
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword( email: email, password: password);
+      ScaffoldMessenger.of(context).showSnackBar((const SnackBar(backgroundColor: Colors.redAccent,content: Text("Registered Successfully", style: TextStyle(fontSize: 20.0),)
+          )
+          )
+      );
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
+    }on FirebaseException catch(e){
+      if(e.code=='weak-password'){
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(backgroundColor: Colors.orangeAccent,
+            content: Text("Password Provided is too Weak", style: TextStyle(fontSize: 18.0),
+            )));
+      }
+      else if(e.code=="email-already-in-use"){
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(backgroundColor: Colors.orangeAccent,
+            content: Text("Account Already exsists", style: TextStyle(fontSize: 18.0),
+            )));
       }
     }
-  }
+    }
 
 
 
@@ -61,7 +59,7 @@ class _SignupPageState extends State<SignupPage> {
       body: //he body property is set to a Container widget.
       Container(     //It wraps the entire content of the page.
         width: double.infinity,    //width is set to double.infinity to take the full width of the screen.
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: [
@@ -79,44 +77,44 @@ class _SignupPageState extends State<SignupPage> {
           //crossAxisAlignment is set to CrossAxisAlignment.center
           // to align children to the center of the cross axis (center-aligned in this case)
           children: <Widget>[
-            SizedBox(height: 80,),
+            const SizedBox(height: 80,),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Form(
                 key: _formKey, //this is form of the global key
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    FadeInUp(duration: Duration(milliseconds: 1000), child: Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 40),)),
-                    SizedBox(height: 10,),
-                    FadeInUp(duration: Duration(milliseconds: 1300), child: Text("Welcome To the GreenEats", style: TextStyle(color: Colors.white, fontSize: 18),)),
+                    FadeInUp(duration: const Duration(milliseconds: 1000), child: const Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 40),)),
+                    const SizedBox(height: 10,),
+                    FadeInUp(duration: const Duration(milliseconds: 1300), child: const Text("Welcome To the GreenEats", style: TextStyle(color: Colors.white, fontSize: 18),)),
                   ],
                 ),
               ),
             ),
 
             //end of the words
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
 
             Expanded(
 
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white54,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 60,),
-                      FadeInUp(duration: Duration(milliseconds: 1400), child: Container(
+                      const SizedBox(height: 60,),
+                      FadeInUp(duration: const Duration(milliseconds: 1400), child: Container(
                         decoration: BoxDecoration(
 
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: [BoxShadow(
+                            boxShadow: const [BoxShadow(
                                 color: Color.fromRGBO(225, 95, 27, .3),
                                 blurRadius: 20,
                                 offset: Offset(0, 10)
@@ -126,7 +124,7 @@ class _SignupPageState extends State<SignupPage> {
 
                           children: <Widget>[
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
 
@@ -139,7 +137,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: "Name",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   prefixIcon: Icon(Icons.face_2),
@@ -148,7 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
 
@@ -161,7 +159,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: "Email or Phone number",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   prefixIcon: Icon(Icons.email),
@@ -170,7 +168,7 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   border: Border(bottom: BorderSide(color: Colors.grey.shade200))
                               ),
@@ -183,7 +181,7 @@ class _SignupPageState extends State<SignupPage> {
                                   return null;
                                 },
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     hintText: "Password",
                                     hintStyle: TextStyle(color: Colors.grey),
                                     prefixIcon: Icon(Icons.password),
@@ -196,10 +194,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       )
                       ),
-                      SizedBox(height: 40,),
+                      const SizedBox(height: 40,),
 
-                      SizedBox(height: 40,),
-                      FadeInUp(duration: Duration(milliseconds: 1600),
+                      const SizedBox(height: 40,),
+                      FadeInUp(duration: const Duration(milliseconds: 1600),
 
 
                               child: MaterialButton(
@@ -217,33 +215,33 @@ class _SignupPageState extends State<SignupPage> {
                                 },
                         height: 50,
                         // margin: EdgeInsets.symmetric(horizontal: 50),
-                        color: Color.fromRGBO(197, 29, 29, 0.6588235294117647),
+                        color: const Color.fromRGBO(197, 29, 29, 0.6588235294117647),
                         shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50),
 
                         ),
                         // decoration: BoxDecoration(
                         // ),
-                        child: Center(
+                        child: const Center(
                               child: Text("Sign Up", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                         ),
                       ),
 
                           ),
-                      FadeInUp(duration: Duration(milliseconds: 1700), child: GestureDetector(
+                      FadeInUp(duration: const Duration(milliseconds: 1700), child: GestureDetector(
                           onTap:(){
-Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+Navigator.push(context, MaterialPageRoute(builder: (context)=>const LoginPage()));
 
                           } ,
-                          child: Text("Already have an account? Login", style: TextStyle(color: Colors.grey),))),
-                      SizedBox(height: 50,),
-                      FadeInUp(duration: Duration(milliseconds: 1700), child: Text("Continue with social media", style: TextStyle(color: Colors.grey),)),
-                      SizedBox(height: 30,),
+                          child: const Text("Already have an account? Login", style: TextStyle(color: Colors.grey),))),
+                      const SizedBox(height: 50,),
+                      FadeInUp(duration: const Duration(milliseconds: 1700), child: const Text("Continue with social media", style: TextStyle(color: Colors.grey),)),
+                      const SizedBox(height: 30,),
                       Row(
                         children: <Widget>[
                           Expanded(
                             child: FadeInUp(
-                              duration: Duration(milliseconds: 1900),
+                              duration: const Duration(milliseconds: 1900),
                               child: GestureDetector(
                                 onTap: () async {
                                   const url = 'https://www.facebook.com';
@@ -262,9 +260,9 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                               ),
                             ),
                           ),
-                          SizedBox(width: 30,),
+                          const SizedBox(width: 30,),
                           Expanded(
-                            child: FadeInUp(duration: Duration(milliseconds: 1900), child: MaterialButton(
+                            child: FadeInUp(duration: const Duration(milliseconds: 1900), child: MaterialButton(
                               onPressed: () {},
                               height: 50,
                               shape: RoundedRectangleBorder(
@@ -272,7 +270,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
 
                               ),
                               color: Colors.black,
-                              child: Center(
+                              child: const Center(
                                 child: Text("Github", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                               ),
                             )),
