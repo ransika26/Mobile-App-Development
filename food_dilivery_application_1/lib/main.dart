@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_dilivery_application_1/admin/home_admin.dart';
+import 'package:food_dilivery_application_1/Admin/Admin_Login.dart';
+import 'package:food_dilivery_application_1/pages/bottomnav.dart';
+import 'package:food_dilivery_application_1/pages/home.dart';
+import 'package:food_dilivery_application_1/pages/login.dart';
+import 'package:food_dilivery_application_1/pages/onboard_pages.dart';
+import 'package:food_dilivery_application_1/pages/signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,9 +40,9 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-     //   home: const BottomNav()
+       home: const Onboard()
     //  home: isLoggedIn ? const BottomNav() : SignupPage(), // Conditional loading
-       home: const HomeAdmin()
+    //  home:const Onboard()
     );
   }
 }
