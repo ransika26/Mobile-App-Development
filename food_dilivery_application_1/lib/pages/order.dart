@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_paypal/flutter_paypal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:food_dilivery_application_1/services/cart_provider.dart';
 import 'package:food_dilivery_application_1/services/create_order_model.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,102 @@ class CartPage extends StatelessWidget {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    
+                    onPressed: () {
+                      // Proceed to PayPal payment
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => UsePaypal(
+                            sandboxMode: true,
+                            clientId: "AaT8FlEwVbc5LEPdtYZCpGlrl5uNI-l_UQgBmhgp9u91xManFNPGowGAb-qjKcYcrSXRcAezS5jL8StJ",
+                            secretKey: "EHyPFZdkaSgDA6vJ32yMyPE5_rf3mLIVI1oIXeBNOUZU-BksiNt7_Zn68xeSWqEQQw972rRoii_qDpsW",
+                            returnURL: "https://example.com/return",
+                            cancelURL: "https://example.com/cancel",
+                            transactions: [
+                              {
+                                "amount": {
+                                  "total": totalAmount.toStringAsFixed(2),
+                                  "currency": "USD",
+                                  "details": {
+                                    "subtotal": totalAmount.toStringAsFixed(2),
+                                    "shipping": '0',
+                                    "shipping_discount": 0
+                                  }
+                                },
+                                "description": "Payment for items in the cart",
+                                "item_list": {
+                                  "items": snapshot.data!.docs.map((doc) {
+                                    final itemName = doc['itemName'];
+                                    final itemPrice = doc['itemPrice'];
+                                    final quantity = doc['quantity'];
+                                    return {
+                                      "name": itemName,
+                                      "quantity": quantity,
+                                      "price": itemPrice.toStringAsFixed(2),
+                                      "currency": "USD"
+                                    };
+                                  }).toList(),
+                                  "shipping_address": {
+                                    "line1": "123 Main St", //street address
+                                    "city": "New York", // city name
+                                    "country_code": "US", // country code
+                                    "postal_code": "12345", //postal code
+
+                                  }
+
+                                }
+                              }
+                            ],
+
+                            note: "Payment for items in the cart.", // Shortened note
+                            onSuccess: (params) {
+                              // Handle successful payment
+                              print("Payment successful");
+
+                              // Retrieve the user ID of the current user
+                              final User? user = FirebaseAuth.instance.currentUser;
+                              if (user != null) {
+                                String userId = user.uid;
+
+                                // Create orders object and store it in Firebase
+                                List<Map<String, dynamic>> itemsList = snapshot.data!.docs.map((doc) {
+                                  final itemName = doc['itemName'];
+                                  final itemPrice = doc['itemPrice'];
+                                  final quantity = doc['quantity'];
+                                  return {
+                                    "name": itemName,
+                                    "quantity": quantity,
+                                    "price": itemPrice.toDouble(), // Convert to double
+                                    "currency": "USD"
+                                  };
+                                }).toList();
+
+                                Orders orders = Orders(
+                                  userId: userId,
+                                  totalAmount: totalAmount, // Pass totalAmount directly
+                                  items: itemsList,
+                                  createdAt: Timestamp.now().toDate(), // Convert Timestamp to DateTime
+                                );
+
+                                FirebaseFirestore.instance.collection('orders').add(orders.toMap());
+
+
+                              } else {
+
+                                print("User not signed in");
+
+                              }
+                            },
+
+                            onError: (error) {
+
+                              print("Payment error: $error");
+
+                            },
+                            onCancel: (params) {
+
+                              print("Payment cancelled");
+
+                            },
                           ),
                         ),
                       );
