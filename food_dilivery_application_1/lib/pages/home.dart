@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_dilivery_application_1/pages/details.dart';
 import 'package:food_dilivery_application_1/widget/widget_suppor.dart';
 
@@ -17,8 +17,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _foodItemsStream =
-        FirebaseFirestore.instance.collection('food_items').snapshots();
+    _foodItemsStream = FirebaseFirestore.instance.collection('food_items').snapshots();
   }
 
   @override
@@ -33,15 +32,14 @@ class _HomeState extends State<Home> {
               height: 80.0,
               child: Row(
                 children: [
-                  SizedBox(width: 25.0),
+                  SizedBox(width: 30.0),
                   Text(
                     "Hello, suresh",
                     style: AppWidget.boldTextFieldStyle(),
                   ),
                   SizedBox(width: 120.0),
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 25.0, left: 0.0, right: 10.0),
+                    margin: const EdgeInsets.only(top: 25.0, left: 0.0, right: 10.0),
                     padding: EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -50,8 +48,7 @@ class _HomeState extends State<Home> {
                     child: Icon(Icons.shopping_cart, color: Colors.red),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 25.0, left: 0.0, right: 10.0),
+                    margin: const EdgeInsets.only(top: 25.0, left: 0.0, right: 10.0),
                     padding: EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -60,8 +57,7 @@ class _HomeState extends State<Home> {
                     child: Icon(Icons.account_balance, color: Colors.red),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(
-                        top: 25.0, left: 0.0, right: 10.0),
+                    margin: const EdgeInsets.only(top: 25.0, left: 0.0, right: 10.0),
                     padding: EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -85,7 +81,86 @@ class _HomeState extends State<Home> {
             SizedBox(height: 30.0),
 
             //using this we are dynamically adding our data from Firebase
-          
+            StreamBuilder<QuerySnapshot>(
+              stream: _foodItemsStream,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  );
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(
+                    child: Text('No items available.'),
+                  );
+                }
+
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: snapshot.data!.docs.map((document) {
+                      var data = document.data() as Map<String, dynamic>;
+
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Details(
+                              itemName: data['name'], // Pass the item name
+                              itemDescription: data['description'], // Pass the item description
+                              itemPrice: data['price'], // Pass the item price
+                              imageUrl: data['image_url'], // Pass the item image URL
+                            )),
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10),
+                          child: Material(
+                            elevation: 5.0,
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Container(
+                              padding: EdgeInsets.all(14),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image.network(
+                                    data['image_url'],
+                                    height: 150,
+                                    width: 150,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Text(
+                                    data['name'],
+                                    style: AppWidget.semiBoldTextFieldStyle(),
+                                  ),
+                                  SizedBox(height: 5.0),
+                                  Text(
+                                    data['description'],
+                                    style: AppWidget.LightTextFieldStyle(),
+                                  ),
+                                  Text(
+                                    'Rs.${data['price']}',
+                                    style: AppWidget.semiBoldTextFieldStyle(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
