@@ -3,7 +3,8 @@ import 'package:food_dilivery_application_1/services/CartItemModel.dart';
 import 'package:food_dilivery_application_1/services/cart_provider.dart';
 import 'package:food_dilivery_application_1/widget/widget_suppor.dart';
 import 'package:provider/provider.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 class Details extends StatefulWidget {
   final String itemName;
   final String itemDescription;
@@ -125,7 +126,7 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.semiBoldTextFieldStyle(),
                       ),
                       Text(
-                        '\$${(widget.itemPrice * quantity).toStringAsFixed(2)}',
+                        '\Rs.${(widget.itemPrice * quantity).toStringAsFixed(2)}',
                         style: AppWidget.HeadLineTextFieldStyle(),
                       ),
                     ],
@@ -139,9 +140,14 @@ class _DetailsState extends State<Details> {
                         quantity: quantity,
                         imageUrl: widget.imageUrl,
                       );
-                      // Add the item to the cart using CartProvider
-                      context.read<CartProvider>().addToCart(cartItem);
-                      // Show a snackbar ,item was added to the cart
+
+
+                      String userId = FirebaseAuth.instance.currentUser!.uid;
+
+                      CollectionReference cartCollection = FirebaseFirestore.instance.collection('users').doc(userId).collection('cart');
+                      // Add the item to the user's cart collection
+                      cartCollection.add(cartItem.toMap());
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Item added to cart'),
