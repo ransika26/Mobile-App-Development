@@ -43,30 +43,33 @@ class _OnboardState extends State<Onboard> {
                 },
                 itemBuilder: (_, i) {
                   return Padding(
-                    padding: EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          contents[i].image,
-                          height: 450,
-                          width: MediaQuery.of(context).size.width ,
-                          fit: BoxFit.fill,
-                        ),
-                        SizedBox(
-                          height: 40.0,
-                        ),
-                        Text(
-                          contents[i].title,
-                          style: AppWidget.HeadLineTextFieldStyle(),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Text(
-                          contents[i].description,
-                          style: AppWidget.LightTextFieldStyle(),
-                        )
-                      ],
+                    padding:
+                        EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            contents[i].image,
+                            height: 450,
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fill,
+                          ),
+                          SizedBox(
+                            height: 40.0,
+                          ),
+                          Text(
+                            contents[i].title,
+                            style: AppWidget.HeadLineTextFieldStyle(),
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            contents[i].description,
+                            style: AppWidget.LightTextFieldStyle(),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }),
@@ -76,29 +79,33 @@ class _OnboardState extends State<Onboard> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 contents.length,
-                    (index) => buildDot(index, context),
+                (index) => buildDot(index, context),
               ),
             ),
           ),
           GestureDetector(
             onTap: () {
               if (currentIndex == contents.length - 1) {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => SignupPage()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SignupPage()));
               }
               _controller.nextPage(
                   duration: Duration(milliseconds: 100),
                   curve: Curves.bounceIn);
             },
             child: Container(
-              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                  color: Colors.red, borderRadius: BorderRadius.circular(20)),
               height: 60,
               margin: EdgeInsets.all(40),
               width: double.infinity,
               child: Center(
                 child: Text(
-                  currentIndex == contents.length - 1?"Start": "Next",
-                  style: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+                  currentIndex == contents.length - 1 ? "Start" : "Next",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
